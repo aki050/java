@@ -33,6 +33,28 @@
     .chukichi { color: #1e88e5; }
     .shokichi { color: #ff8f00; }
     .kyou { color: #c62828; }
+    .history {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #dde4eb;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .history strong {
+      display: block;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+    .history p {
+      margin: 0.4rem 0;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .history p:last-child {
+      border-bottom: none;
+    }
   </style>
 </head>
 <body>
@@ -42,12 +64,17 @@
   </label>
   <button id="draw">おみくじを引く</button>
   <div class="result" id="result">結果がここに表示されます</div>
+  <div class="history">
+    <strong>引いた履歴</strong>
+    <div id="historyList">まだ引いていません</div>
+  </div>
 
   <script>
     const items = ["桜", "バスケットボール", "時計", "猫", "本"];
     const drawButton = document.getElementById('draw');
     const nameField = document.getElementById('name');
     const resultDiv = document.getElementById('result');
+    const historyList = document.getElementById('historyList');
 
     function getOmikuji() {
       const rand = Math.floor(Math.random() * 20);
@@ -65,12 +92,23 @@
       resultDiv.className = `result ${omikuji === '大吉' ? 'daikichi' : omikuji === '中吉' ? 'chukichi' : omikuji === '小吉' ? 'shokichi' : 'kyou'}`;
       resultDiv.textContent = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
       setTimeout(() => resultDiv.classList.add('show'), 10);
+      addHistory(name, omikuji, luckyItem);
     }
 
     function showError(message) {
       resultDiv.className = 'result show';
       resultDiv.style.color = 'red';
       resultDiv.textContent = message;
+    }
+
+    function addHistory(name, omikuji, item) {
+      const p = document.createElement('p');
+      const now = new Date().toLocaleString('ja-JP', { hour12: false });
+      p.textContent = `${now} - ${name}さん: ${omikuji} (${item})`;
+      historyList.insertBefore(p, historyList.firstChild);
+      if (historyList.childElementCount > 7) {
+        historyList.removeChild(historyList.lastChild);
+      }
     }
 
     drawButton.addEventListener('click', () => {
