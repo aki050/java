@@ -43,16 +43,16 @@ public class Main extends JFrame {
             return;
         }
 
-        int num = rand.nextInt(20); // 0-19 のいずれか
+        int num = rand.nextInt(100); // 0-99 のいずれか
 
         String result;
-        if (num == 0) {
+        if (num < 10) {            // 10%
             result = "大吉";
-        } else if (num >= 1 && num <= 4) {
+        } else if (num < 30) {      // 20%
             result = "中吉";
-        } else if (num >= 5 && num <= 11) {
+        } else if (num < 70) {      // 40%
             result = "小吉";
-        } else {
+        } else {                    // 30%
             result = "凶";
         }
 
