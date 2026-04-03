@@ -22,6 +22,10 @@
       border-radius: 8px;
       background: #f9f9f9;
     }
+    .daikichi { color: #2e7d32; }
+    .chukichi { color: #1e88e5; }
+    .shokichi { color: #ff8f00; }
+    .kyou { color: #c62828; }
   </style>
 </head>
 <body>
@@ -47,7 +51,7 @@
     }
 
     function getLuckyItem() {
-      return items[Math.floor(Math.random() * items.length)];
+      return iteclassName = `result ${omikuji === '大吉' ? 'daikichi' : omikuji === '中吉' ? 'chukichi' : omikuji === '小吉' ? 'shokichi' : 'kyou'}`om() * items.length)];
     }
 
     function showResult(name, omikuji, luckyItem) {
