@@ -60,10 +60,10 @@
 <body>
   <h1>おみくじWebアプリ</h1>
   <label>お名前
-    <input id="name" type="text" placeholder="名前を入力" />
+    <input id="name" type="text" placeholder="名前を入力" required maxlength="20" aria-label="名前入力" />
   </label>
   <button id="draw">おみくじを引く</button>
-  <div class="result" id="result">結果がここに表示されます</div>
+  <div class="result" id="result" role="status" aria-live="polite">結果がここに表示されます</div>
   <div class="history">
     <strong>引いた履歴</strong>
     <div id="historyList">まだ引いていません</div>
@@ -115,6 +115,12 @@
       const name = nameField.value.trim();
       if (!name) {
         showError('名前を入力してください');
+        nameField.focus();
+        return;
+      }
+      if (name.length > 20) {
+        showError('名前は20文字以内で入力してください');
+        nameField.focus();
         return;
       }
 
