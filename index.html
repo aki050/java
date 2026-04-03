@@ -76,6 +76,13 @@
     const resultDiv = document.getElementById('result');
     const historyList = document.getElementById('historyList');
 
+    const descriptions = {
+      "大吉": "大願成就の運勢です。自信をもって進みましょう！",
+      "中吉": "着実に良い結果が見込めます。努力の継続がカギです。",
+      "小吉": "細かな幸運に恵まれます。注意深く行動して吉。",
+      "凶": "気を引き締めて用心深く過ごしましょう。"
+    };
+
     function getOmikuji() {
       const rand = Math.floor(Math.random() * 20);
       if (rand === 0) return '大吉';
@@ -89,8 +96,10 @@
     }
 
     function showResult(name, omikuji, luckyItem) {
+      const text = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
+      const detail = descriptions[omikuji] ?? '';
       resultDiv.className = `result ${omikuji === '大吉' ? 'daikichi' : omikuji === '中吉' ? 'chukichi' : omikuji === '小吉' ? 'shokichi' : 'kyou'}`;
-      resultDiv.textContent = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
+      resultDiv.textContent = `${text}\n${detail}`;
       setTimeout(() => resultDiv.classList.add('show'), 10);
       addHistory(name, omikuji, luckyItem);
     }
