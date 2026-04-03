@@ -132,6 +132,7 @@
       const text = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
       const detail = descriptions[omikuji] ?? '';
       resultDiv.className = `result ${omikuji === '大吉' ? 'daikichi' : omikuji === '中吉' ? 'chukichi' : omikuji === '小吉' ? 'shokichi' : 'kyou'}`;
+      resultDiv.style.color = '';
       resultDiv.textContent = `${text}\n${detail}`;
       setTimeout(() => resultDiv.classList.add('show'), 10);
       addHistory(name, omikuji, luckyItem);
