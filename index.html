@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja"> 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,29 +38,38 @@
     const nameField = document.getElementById('name');
     const resultDiv = document.getElementById('result');
 
+    function getOmikuji() {
+      const rand = Math.floor(Math.random() * 20);
+      if (rand === 0) return '大吉';
+      if (rand <= 4) return '中吉';
+      if (rand <= 11) return '小吉';
+      return '凶';
+    }
+
+    function getLuckyItem() {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function showResult(name, omikuji, luckyItem) {
+      resultDiv.style.color = 'inherit';
+      resultDiv.textContent = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
+    }
+
+    function showError(message) {
+      resultDiv.style.color = 'red';
+      resultDiv.textContent = message;
+    }
+
     drawButton.addEventListener('click', () => {
       const name = nameField.value.trim();
       if (!name) {
-        resultDiv.textContent = '名前を入力してください';
-        resultDiv.style.color = 'red';
+        showError('名前を入力してください');
         return;
       }
 
-      const rand = Math.floor(Math.random() * 20);
-      let omikuji;
-      if (rand === 0) {
-        omikuji = '大吉';
-      } else if (rand <= 4) {
-        omikuji = '中吉';
-      } else if (rand <= 11) {
-        omikuji = '小吉';
-      } else {
-        omikuji = '凶';
-      }
-
-      const luckyItem = items[Math.floor(Math.random() * items.length)];
-      resultDiv.style.color = 'inherit';
-      resultDiv.textContent = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
+      const omikuji = getOmikuji();
+      const luckyItem = getLuckyItem();
+      showResult(name, omikuji, luckyItem);
     });
   </script>
 </body>
