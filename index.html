@@ -21,6 +21,13 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       background: #f9f9f9;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .result.show {
+      opacity: 1;
+      transform: translateY(0);
     }
     .daikichi { color: #2e7d32; }
     .chukichi { color: #1e88e5; }
@@ -51,15 +58,17 @@
     }
 
     function getLuckyItem() {
-      return iteclassName = `result ${omikuji === '大吉' ? 'daikichi' : omikuji === '中吉' ? 'chukichi' : omikuji === '小吉' ? 'shokichi' : 'kyou'}`om() * items.length)];
+      return items[Math.floor(Math.random() * items.length)];
     }
 
     function showResult(name, omikuji, luckyItem) {
-      resultDiv.style.color = 'inherit';
+      resultDiv.className = `result ${omikuji === '大吉' ? 'daikichi' : omikuji === '中吉' ? 'chukichi' : omikuji === '小吉' ? 'shokichi' : 'kyou'}`;
       resultDiv.textContent = `${name}さんの結果: ${omikuji} (ラッキーアイテム: ${luckyItem})`;
+      setTimeout(() => resultDiv.classList.add('show'), 10);
     }
 
     function showError(message) {
+      resultDiv.className = 'result show';
       resultDiv.style.color = 'red';
       resultDiv.textContent = message;
     }
