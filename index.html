@@ -38,6 +38,12 @@
       from { opacity: 0; transform: translateY(-10px) scale(0.95); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    .single-line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
     label, button, p {
       display: block;
       margin: 0.8rem 0;
@@ -111,7 +117,7 @@
   </style>
 </head>
 <body>
-  <h1>🎋 おみくじWebアプリ - 今日の運勢をチェックして、1日をもっと楽しく！</h1>
+  <h1 class="single-line">🎋 おみくじWebアプリ</h1>
   <label>お名前
     <input id="name" type="text" placeholder="名前を入力" required maxlength="20" aria-label="名前入力" />
   </label>
