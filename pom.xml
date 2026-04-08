@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>omikuji-webapp</artifactId>
+  <version>1.0.0</version>
+  <packaging>war</packaging>
+
+  <name>おみくじWebアプリ</name>
+  <description>シンプルなWeb版おみくじアプリを WAR にパッケージする Maven プロジェクト</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+  </properties>
+
+  <dependencies>
+    <!-- 追加のサーバーサイド依存は不要。静的なWebアプリとしてWARを生成します。 -->
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.basedir}</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.4</version>
+        <configuration>
+          <warSourceDirectory>${project.basedir}</warSourceDirectory>
+          <webResources>
+            <resource>
+              <directory>${project.basedir}</directory>
+              <includes>
+                <include>index.html</include>
+              </includes>
+              <targetPath>/</targetPath>
+            </resource>
+          </webResources>
+          <packagingExcludes>
+            pom.xml,**/Main.java,**/README.md,**/commit-plan.md
+          </packagingExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
